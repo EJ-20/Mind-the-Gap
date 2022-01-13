@@ -19,13 +19,19 @@ public class GUI extends JFrame {
         columns = 4;
 
         topPanel = new JPanel();
-        topPanel.setLayout(new BorderLayout());
+        topPanel.setLayout(new FlowLayout());
 
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new BorderLayout());
 
         instructionLabel = new JLabel("Player's turn");
+
+
+        topButton = new JButton("New Game");
+
         topPanel.add(instructionLabel);
+        topPanel.add(topButton);
+
 
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(topPanel, BorderLayout.NORTH);
