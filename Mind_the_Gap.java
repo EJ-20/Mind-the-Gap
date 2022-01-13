@@ -1,7 +1,7 @@
 public class Mind_the_Gap {
-    public static void (main(String[] args)){
+    public static void main (String[] args){
 
-        GUI demo = new GUI()
+        GUI demo = new GUI();
 
     }
 }

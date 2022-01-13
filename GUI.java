@@ -24,10 +24,15 @@ public class GUI extends JFrame {
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new BorderLayout());
 
+        instructionLabel = new JLabel("Player's turn");
+        topPanel.add(instructionLabel);
+
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(topPanel, BorderLayout.NORTH);
         getContentPane().add(bottomPanel, BorderLayout.SOUTH);
         pack();
+
+        setSize(600,600);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
