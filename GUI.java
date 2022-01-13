@@ -22,7 +22,7 @@ public class GUI extends JFrame {
         topPanel.setLayout(new FlowLayout());
 
         bottomPanel = new JPanel();
-        bottomPanel.setLayout(new BorderLayout());
+        bottomPanel.setLayout(new FlowLayout());
 
         instructionLabel = new JLabel("Player's turn");
 
