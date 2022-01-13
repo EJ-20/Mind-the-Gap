@@ -6,11 +6,11 @@ import java.awt.event.*;
 
 
 
-public class GUI extends JFrame implements ActionListener, MouseListener {
+public class GUI extends JFrame {
     private JPanel topPanel, bottomPanel;
     private JLabel instructionLabel;
     private JButton topButton;
-    private GridSquare [][] gridSquares;
+    //private GridSquare [][] gridSquares;
     private int rows, columns;
 
 
