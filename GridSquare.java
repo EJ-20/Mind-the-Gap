@@ -13,7 +13,7 @@ import javax.swing.*;
  *
  *  @author mhatcher
  */
-public class GridSquare extends JPanel
+public class GridSquare extends JButton
 {
     private int xcoord, ycoord;  // location in the grid
 	
@@ -27,17 +27,19 @@ public class GridSquare extends JPanel
 	}
 	
 	// if the decider is even, it chooses black, otherwise white (for 'column+row' will allow a chequerboard effect)
-    public void setColor( int decider)
+    public void setColor(int decider)
     {
-        Color colour = (int) (decider/2.0) == (decider/2.0) ? Color.black : Color.white;
-        this.setBackground( colour);
+        decider = decider % 2;
+        Color colour = (decider == 0) ? Color.red: Color.blue;
+        this.setBackground(colour);
+
     }
     
     // if the square is black it becomes white, and vice-versa
-    public void switchColor()
+    public void setInitColor()
     {
-        Color colour = (getBackground() == Color.black) ? Color.white: Color.black;
-        this.setBackground( colour);
+
+        this.setBackground(Color.white);
     }
     
     // simple setters and getters
@@ -45,4 +47,5 @@ public class GridSquare extends JPanel
     public void setYcoord(int value)    { ycoord = value; }
     public int getXcoord()              { return xcoord; }
     public int getYcoord()              { return ycoord; }
+    public Color getColor()             {return getBackground();}
 }
