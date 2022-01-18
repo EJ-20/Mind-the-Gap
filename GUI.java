@@ -44,7 +44,6 @@ public class GUI extends JFrame implements ActionListener {
         topPanel.add(instructionLabel);
         topPanel.add(topButton);
 
-
         // create the grid of buttons and add to the appropriate panel
         grid();
 
@@ -63,8 +62,8 @@ public class GUI extends JFrame implements ActionListener {
 
     }
 
-    // starts the game
-    public void game() {
+    // selects a random player to start the game
+    public void player() {
 
         String[] players = {"Player 1's turn", "Player 2's turn"};
         index = count % 2;
@@ -72,6 +71,8 @@ public class GUI extends JFrame implements ActionListener {
 
     }
 
+
+    // creates the grid
     public void grid(){
 
         gridSquares = new GridSquare [x][y];
@@ -91,42 +92,35 @@ public class GUI extends JFrame implements ActionListener {
 
     }
 
-/*
-    public void colors(int y, int x){
-        Color col1 = gridSquares[xCoord-1][yCoord-1].getColor();
-        Color col2 = gridSquares[xCoord+1][yCoord+1].getColor();
-        Color col3 = gridSquares[xCoord][yCoord-1].getColor();
-        Color col4 = gridSquares[xCoord][yCoord+1].getColor();
-        Color col5 = gridSquares[xCoord-1][yCoord].getColor();
-        Color col6 = gridSquares[xCoord+1][yCoord].getColor();
-        Color col7 = gridSquares[xCoord+1][yCoord-1].getColor();
-        Color col8 = gridSquares[xCoord-1][yCoord+1].getColor();
-
-        Color[] colour = new Color[]{col1, col2, col3, col4, col5, col6, col7, col8};
-        System.out.println(colour[2].toString());
-    }
-
-
-
- */
-
-
 
     // method for tracking user actions
     public void actionPerformed (ActionEvent act){
 
         Object selected = act.getSource();
 
+        // instructions for the event when 'New Game' is clicked
         if (selected.equals(topButton)){
 
             rand = new Random();
             count = rand.nextInt(2);
             started = true;
-            game();
+            player();
 
 
         }
 
+        // start a new game if 'New Game' button is clicked
+        if (selected.equals(topButton)) {
+            for (int column = 0; column < y; column++) {
+                for (int row = 0; row < x; row++) {
+
+                    gridSquares[column][row].setInitColor();
+                    started = true;
+                }
+            }
+        }
+
+        // instructions when the game is going on
         if (started) {
 
             if (selected instanceof GridSquare) {
@@ -140,10 +134,8 @@ public class GUI extends JFrame implements ActionListener {
                 int xCoord = square.getXcoord();
                 int yCoord = square.getYcoord();
 
+                player();
 
-                game();
-
-                //colors(yCoord, xCoord);
                 // end of game instructions
                 if (square.getColor().equals(getNorth(square).getColor()) |
                         square.getColor().equals(getSouth(square).getColor())|
@@ -155,24 +147,13 @@ public class GUI extends JFrame implements ActionListener {
                         square.getColor().equals(getSouthWest(square).getColor())){
                     started = false;
 
-                }
-
-            // start a new game if 'New Game' button is clicked
-            if (selected.equals(topButton)){
-                for(int column = 0; column < y; column++) {
-                    for (int row = 0; row < x; row++) {
-
-                        gridSquares[column][row].setInitColor();
-
+                    if (square.getColor().equals(Color.red)){
+                        instructionLabel.setText("Player 2 wins");
+                    } else {
+                        instructionLabel.setText("Player 1 wins");
                     }
+
                 }
-            }
-
-
-
-
-
-
             }
         }
     }
