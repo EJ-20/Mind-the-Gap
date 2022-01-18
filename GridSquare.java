@@ -48,4 +48,5 @@ public class GridSquare extends JButton
     public int getXcoord()              { return xcoord; }
     public int getYcoord()              { return ycoord; }
     public Color getColor()             {return getBackground();}
+
 }

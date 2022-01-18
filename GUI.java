@@ -91,7 +91,7 @@ public class GUI extends JFrame implements ActionListener {
 
     }
 
-    /*
+/*
     public void colors(int y, int x){
         Color col1 = gridSquares[xCoord-1][yCoord-1].getColor();
         Color col2 = gridSquares[xCoord+1][yCoord+1].getColor();
@@ -103,9 +103,12 @@ public class GUI extends JFrame implements ActionListener {
         Color col8 = gridSquares[xCoord-1][yCoord+1].getColor();
 
         Color[] colour = new Color[]{col1, col2, col3, col4, col5, col6, col7, col8};
+        System.out.println(colour[2].toString());
     }
 
-     */
+
+
+ */
 
 
 
@@ -121,19 +124,10 @@ public class GUI extends JFrame implements ActionListener {
             started = true;
             game();
 
+
         }
+
         if (started) {
-
-            // start a new game if 'New Game' button is clicked
-            if (selected.equals(topButton)){
-                for(int column = 0; column < y; column++) {
-                    for (int row = 0; row < x; row++) {
-
-                        gridSquares[column][row].setInitColor();
-
-                    }
-                }
-            }
 
             if (selected instanceof GridSquare) {
 
@@ -151,9 +145,47 @@ public class GUI extends JFrame implements ActionListener {
 
                 //colors(yCoord, xCoord);
                 // end of game instructions
+                if (square.getColor().equals(getNorth(square).getColor()) |
+                        square.getColor().equals(getSouth(square).getColor())|
+                        square.getColor().equals(getEast(square).getColor())|
+                        square.getColor().equals(getWest(square).getColor())|
+                        square.getColor().equals(getNorthEast(square).getColor())|
+                        square.getColor().equals(getNorthWest(square).getColor())|
+                        square.getColor().equals(getSouthEast(square).getColor())|
+                        square.getColor().equals(getSouthWest(square).getColor())){
+                    started = false;
+
+                }
+
+            // start a new game if 'New Game' button is clicked
+            if (selected.equals(topButton)){
+                for(int column = 0; column < y; column++) {
+                    for (int row = 0; row < x; row++) {
+
+                        gridSquares[column][row].setInitColor();
+
+                    }
+                }
+            }
+
+
+
+
+
+
             }
         }
     }
+
+    // getter methods
+    public GridSquare getNorth(GridSquare current)          {return gridSquares[current.getXcoord()][current.getYcoord()+1];}
+    public GridSquare getSouth(GridSquare current)          {return gridSquares[current.getXcoord()][current.getYcoord()-1];}
+    public GridSquare getEast(GridSquare current)           {return gridSquares[current.getXcoord()+1][current.getYcoord()];}
+    public GridSquare getWest(GridSquare current)           {return gridSquares[current.getXcoord()-1][current.getYcoord()];}
+    public GridSquare getSouthEast(GridSquare current)      {return gridSquares[current.getXcoord()+1][current.getYcoord()-1];}
+    public GridSquare getNorthWest(GridSquare current)      {return gridSquares[current.getXcoord()-1][current.getYcoord()+1];}
+    public GridSquare getSouthWest(GridSquare current)      {return gridSquares[current.getXcoord()-1][current.getYcoord()-1];}
+    public GridSquare getNorthEast(GridSquare current)      {return gridSquares[current.getXcoord()+1][current.getYcoord()+1];}
 }
 
 
