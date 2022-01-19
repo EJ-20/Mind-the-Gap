@@ -1,0 +1,13 @@
+How to run this program from a shell window:
+
+Open console (terminal, command.exe, etc)
+
+Navigate to inside the Mind the Gap folder
+
+Compile the code:
+
+javac *.java
+
+Run the code:
+
+java Mind_the_Gap.java
