@@ -19,6 +19,8 @@ public class GUI extends JFrame implements ActionListener {
     private boolean started = false;
     private int xCoord, yCoord;
     private Random rand;
+    private boolean surrounding;        // test
+
 
     // create, organize and display the GUI
     public GUI() {
@@ -26,6 +28,8 @@ public class GUI extends JFrame implements ActionListener {
         // x and y are the number of rows and columns
         x = 4;
         y = 4;
+
+
 
         // creating the panels as required
         topPanel = new JPanel();
@@ -93,13 +97,14 @@ public class GUI extends JFrame implements ActionListener {
     }
 
 
-    // method for tracking user actions
-    public void actionPerformed (ActionEvent act){
+    // method for tracking user new actions
+    public void actionPerformed (ActionEvent act) {
 
         Object selected = act.getSource();
 
+
         // instructions for the event when 'New Game' is clicked
-        if (selected.equals(topButton)){
+        if (selected.equals(topButton)) {
 
             rand = new Random();
             count = rand.nextInt(2);
@@ -121,44 +126,54 @@ public class GUI extends JFrame implements ActionListener {
         }
 
         // instructions when the game is going on
-        if (started) {
+        try {
 
-            if (selected instanceof GridSquare) {
+            if (started) {
 
-                GridSquare square = (GridSquare) selected;
-                if (square.getColor() == Color.white) {
-                    square.setColor(count);
-                    count++;
-                }
+                if (selected instanceof GridSquare) {
 
-                int xCoord = square.getXcoord();
-                int yCoord = square.getYcoord();
-
-                player();
-
-                // end of game instructions
-                if (square.getColor().equals(getNorth(square).getColor()) |
-                        square.getColor().equals(getSouth(square).getColor())|
-                        square.getColor().equals(getEast(square).getColor())|
-                        square.getColor().equals(getWest(square).getColor())|
-                        square.getColor().equals(getNorthEast(square).getColor())|
-                        square.getColor().equals(getNorthWest(square).getColor())|
-                        square.getColor().equals(getSouthEast(square).getColor())|
-                        square.getColor().equals(getSouthWest(square).getColor())){
-                    started = false;
-
-                    if (square.getColor().equals(Color.red)){
-                        instructionLabel.setText("Player 2 wins");
-                    } else {
-                        instructionLabel.setText("Player 1 wins");
+                    GridSquare square = (GridSquare) selected;
+                    if (square.getColor() == Color.white) {
+                        square.setColor(count);
+                        count++;
                     }
 
+                    int xCoord = square.getXcoord();
+                    int yCoord = square.getYcoord();
+
+                    System.out.println("Coords " + xCoord + " " + yCoord);
+
+                    player();
+
+                    // end of game instructions
+                    //test
+                    surrounding = square.getColor().equals(getNorth(square).getColor()) |
+                            square.getColor().equals(getSouth(square).getColor()) |
+                            square.getColor().equals(getEast(square).getColor()) |
+                            square.getColor().equals(getWest(square).getColor()) |
+                            square.getColor().equals(getNorthEast(square).getColor()) |
+                            square.getColor().equals(getNorthWest(square).getColor()) |
+                            square.getColor().equals(getSouthEast(square).getColor()) |
+                            square.getColor().equals(getSouthWest(square).getColor());
+                    if (surrounding) {
+                        started = false;
+
+                        if (square.getColor().equals(Color.red)) {
+                            instructionLabel.setText("Player 2 wins");
+                        } else {
+                            instructionLabel.setText("Player 1 wins");
+                        }
+
+                    }
                 }
             }
         }
+        catch (Exception e){
+
+        }
     }
 
-    // getter methods
+    // getter methods for the blocks surrounding the selected one
     public GridSquare getNorth(GridSquare current)          {return gridSquares[current.getXcoord()][current.getYcoord()+1];}
     public GridSquare getSouth(GridSquare current)          {return gridSquares[current.getXcoord()][current.getYcoord()-1];}
     public GridSquare getEast(GridSquare current)           {return gridSquares[current.getXcoord()+1][current.getYcoord()];}

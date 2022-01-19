@@ -22,8 +22,22 @@ public class GridSquare extends JButton
 	{
 		super();
 		this.setSize(50,50);
+
+        if (xcoord < 0){
+            xcoord = 0;
+        }
+        if (xcoord > 3){
+            xcoord = 3;
+        }
+        if (ycoord < 0){
+            ycoord = 0;
+        }
+        if (ycoord > 3){
+            ycoord = 3;
+        }
 		this.xcoord = xcoord;
 		this.ycoord = ycoord;
+
 	}
 	
 	// if the decider is even, it chooses black, otherwise white (for 'column+row' will allow a chequerboard effect)
